@@ -9,31 +9,36 @@ fn main() {
         todo.insert(item);
         match todo.save() {
             Ok(_) => println!("A to-do item has been added"),
-            Err(e) => println!("Error occurred: {}", e)
+            Err(e) => println!("Error occurred: {}", e),
         }
-    }
-    else if action == "complete" {
+    } else if action == "complete" {
         match todo.complete(&item) {
-            Some(_) =>  match todo.save() {
+            Some(_) => match todo.save() {
                 Ok(_) => println!("The to-do item has been updated"),
-                Err(e) => println!("Error occurred: {}", e)
+                Err(e) => println!("Error occurred: {}", e),
             },
-            None => println!("'{}' is not present in the list", item)
+            None => println!("'{}' is not present in the list", item),
         }
     }
 }
 
 struct Todo {
-    map: HashMap<String, bool>
+    map: HashMap<String, bool>,
 }
 
 impl Todo {
     fn new() -> Result<Todo, std::io::Error> {
-        let f = std::fs::OpenOptions::new().create(true).read(true).write(true).open("records.json")?;
+        let f = std::fs::OpenOptions::new()
+            .create(true)
+            .read(true)
+            .write(true)
+            .open("records.json")?;
         match serde_json::from_reader(f) {
             Ok(map) => Ok(Todo { map }),
-            Err(e) if e.is_eof() => Ok(Todo { map: HashMap::new() }),
-            Err(e) => panic!("Error occurred: {}", e)
+            Err(e) if e.is_eof() => Ok(Todo {
+                map: HashMap::new(),
+            }),
+            Err(e) => panic!("Error occurred: {}", e),
         }
     }
     // fn new() -> Result<Todo, std::io::Error> {
@@ -54,7 +59,10 @@ impl Todo {
     }
 
     fn save(self) -> Result<(), Box<dyn std::error::Error>> {
-        let f = std::fs::OpenOptions::new().create(true).write(true).open("records.json")?;
+        let f = std::fs::OpenOptions::new()
+            .create(true)
+            .write(true)
+            .open("records.json")?;
         serde_json::to_writer_pretty(f, &self.map)?;
         Ok(())
     }
@@ -70,7 +78,7 @@ impl Todo {
     fn complete(&mut self, key: &String) -> Option<()> {
         match self.map.get_mut(key) {
             Some(v) => Some(*v = false),
-            None => None
+            None => None,
         }
     }
 }

@@ -1,6 +1,6 @@
 use super::errors::ServiceError;
 use diesel::prelude::*;
-use diesel::r2d2::{ConnectionManager};
+use diesel::r2d2::ConnectionManager;
 use lazy_static::lazy_static;
 use std::env::var;
 
@@ -22,6 +22,10 @@ pub fn init() {
 }
 
 pub fn connection() -> Result<DbConnection, ServiceError> {
-    POOL.get()
-        .map_err(|e| ServiceError::new(500, format!("Failed to establish database connection: {}", e)))
+    POOL.get().map_err(|e| {
+        ServiceError::new(
+            500,
+            format!("Failed to establish database connection: {}", e),
+        )
+    })
 }

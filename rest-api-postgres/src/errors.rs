@@ -14,7 +14,7 @@ impl ServiceError {
     pub fn new(status_code: u16, message: String) -> ServiceError {
         ServiceError {
             status_code,
-            message
+            message,
         }
     }
 }
@@ -30,7 +30,7 @@ impl From<DieselError> for ServiceError {
         match error {
             DieselError::DatabaseError(_, e) => ServiceError::new(409, e.message().to_string()),
             DieselError::NotFound => ServiceError::new(404, "Record not found".to_string()),
-            err => ServiceError::new(500, format!("Diesel error: {}", err))
+            err => ServiceError::new(500, format!("Diesel error: {}", err)),
         }
     }
 }
@@ -39,7 +39,7 @@ impl ResponseError for ServiceError {
     fn error_response(&self) -> HttpResponse {
         let status_code = match StatusCode::from_u16(self.status_code) {
             Ok(status_code) => status_code,
-            Err(_) => StatusCode::INTERNAL_SERVER_ERROR
+            Err(_) => StatusCode::INTERNAL_SERVER_ERROR,
         };
         let message = match status_code.as_u16() < 500 {
             true => self.message.clone(),

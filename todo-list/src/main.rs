@@ -1,9 +1,10 @@
 use std::collections::HashMap;
+use std::{env, fs, io};
 // use std::io::Read;
 
 fn main() {
-    let action = std::env::args().nth(1).expect("Please specify an action");
-    let item = std::env::args().nth(2).expect("Please specify an item");
+    let action = env::args().nth(1).expect("Please specify an action");
+    let item = env::args().nth(2).expect("Please specify an item");
     let mut todo = Todo::new().expect("Initialisation failed");
     if action == "add" {
         todo.insert(item);
@@ -27,8 +28,8 @@ struct Todo {
 }
 
 impl Todo {
-    fn new() -> Result<Todo, std::io::Error> {
-        let f = std::fs::OpenOptions::new()
+    fn new() -> Result<Todo, io::Error> {
+        let f = fs::OpenOptions::new()
             .create(true)
             .read(true)
             .write(true)
@@ -41,8 +42,8 @@ impl Todo {
             Err(e) => panic!("Error occurred: {}", e),
         }
     }
-    // fn new() -> Result<Todo, std::io::Error> {
-    //     let mut f = std::fs::OpenOptions::new().create(true).read(true).write(true).open("records.txt")?;
+    // fn new() -> Result<Todo, io::Error> {
+    //     let mut f = fs::OpenOptions::new().create(true).read(true).write(true).open("records.txt")?;
     //     let mut content = String::new();
     //     f.read_to_string(&mut content)?;
     //     let map: HashMap<String, bool> = content
@@ -59,20 +60,20 @@ impl Todo {
     }
 
     fn save(self) -> Result<(), Box<dyn std::error::Error>> {
-        let f = std::fs::OpenOptions::new()
+        let f = fs::OpenOptions::new()
             .create(true)
             .write(true)
             .open("records.json")?;
         serde_json::to_writer_pretty(f, &self.map)?;
         Ok(())
     }
-    // fn save(self) -> Result<(), std::io::Error> {
+    // fn save(self) -> Result<(), io::Error> {
     //     let mut content = String::new();
     //     for (k, v) in self.map {
     //         let record = format!("{}, {}\n", k, v);
     //         content.push_str(&record);
     //     }
-    //     std::fs::write("records.txt", content)
+    //     fs::write("records.txt", content)
     // }
 
     fn complete(&mut self, key: &String) -> Option<()> {

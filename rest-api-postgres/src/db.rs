@@ -11,7 +11,7 @@ lazy_static! {
     static ref POOL: Pool = {
         let db_url = var("DATABASE_URL").expect("DATABASE_URL not set");
         let manager = ConnectionManager::<PgConnection>::new(db_url);
-        r2d2::Pool::builder()
+        Pool::builder()
             .build(manager)
             .expect("Failed to create database pool")
     };

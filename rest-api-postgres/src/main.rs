@@ -1,7 +1,5 @@
-#[macro_use]
-extern crate diesel;
-#[macro_use]
-extern crate log;
+#[macro_use] extern crate diesel;
+#[macro_use] extern crate log;
 
 use actix_web::{middleware, App, HttpServer};
 use dotenv::dotenv;

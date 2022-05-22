@@ -10,6 +10,32 @@ Install Rust.
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
+### Useful Commands
+Create a new project.
+```
+cargo new <project-name>
+```
+
+Check the correctness of the code.
+```
+cargo check
+```
+
+Format the code to maintain a consistent code style.
+```
+cargo fmt
+```
+
+Build and run the project.
+```
+cargo run
+```
+
+Execute tests.
+```
+cargo test
+```
+
 ### Reference
 todo-list:
 - https://www.freecodecamp.org/news/how-to-build-a-to-do-app-with-rust/

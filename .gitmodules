@@ -1,0 +1,3 @@
+[submodule "rust-jwt-auth"]
+	path = rust-jwt-auth
+	url = https://github.com/celiakwan/rust-jwt-auth.git

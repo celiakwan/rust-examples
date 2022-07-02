@@ -17,7 +17,7 @@ pub fn adder_mw(data: &Arc<Mutex<Vec<i32>>>) -> SafeFnWrapper<Action> {
             let mut data = data.lock().unwrap();
             data.push(sum);
             Some(Action::Result(sum))
-        },
+        }
         _ => None,
     };
     SafeFnWrapper::new(adder_lambda)

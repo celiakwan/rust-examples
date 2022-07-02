@@ -25,7 +25,7 @@ async fn main() {
         let mw_fun: SafeFnWrapper<Action> = adder_mw(&data);
         handles.push(mw_fun.spawn(Action::Add(1, 2)));
         handles.push(mw_fun.spawn(Action::Add(3, 4)));
-        
+
         for handle in handles {
             println!("{:?}", handle.await.unwrap());
         }

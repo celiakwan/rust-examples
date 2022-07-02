@@ -45,3 +45,6 @@ web-service-template:
 
 rest-api-postgres:
 - https://cloudmaker.dev/how-to-create-a-rest-api-in-rust/
+
+async-middleware:
+- https://developerlife.com/2022/03/12/rust-tokio/

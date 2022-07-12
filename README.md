@@ -48,3 +48,6 @@ rest-api-postgres:
 
 async-middleware:
 - https://developerlife.com/2022/03/12/rust-tokio/
+
+letter-counter:
+- https://nickymeuleman.netlify.app/blog/multithreading-rust

@@ -23,6 +23,6 @@ pub fn frequency(input: &Vec<String>, worker_count: usize) -> HashMap<char, usiz
             *result.entry(key).or_default() += value;
         }
     }
-    
+
     result
 }

@@ -1,4 +1,9 @@
-use std::{collections::HashMap, env, fs::File, io::{BufRead, BufReader}};
+use std::{
+    collections::HashMap,
+    env,
+    fs::File,
+    io::{BufRead, BufReader},
+};
 
 mod counter_channel;
 mod counter_joinhandle;

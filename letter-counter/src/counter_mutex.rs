@@ -1,4 +1,8 @@
-use std::{collections::HashMap, sync::{Arc, Mutex}, thread};
+use std::{
+    collections::HashMap,
+    sync::{Arc, Mutex},
+    thread,
+};
 
 pub fn frequency(input: &Vec<String>, worker_count: usize) -> HashMap<char, usize> {
     let result = Arc::new(Mutex::new(HashMap::new()));

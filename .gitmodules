@@ -1,3 +1,6 @@
 [submodule "rust-jwt-auth"]
 	path = rust-jwt-auth
 	url = https://github.com/celiakwan/rust-jwt-auth.git
+[submodule "rust-redis"]
+	path = rust-redis
+	url = https://github.com/celiakwan/rust-redis.git
